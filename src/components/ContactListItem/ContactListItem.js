@@ -12,7 +12,7 @@ Notify.init({
   cssAnimationStyle: 'zoom',
 });
 
-export const ContactListItem = ({ name, number, id }) => {
+export const ContactListItem = ({ name, phone, id }) => {
   const dispatch = useDispatch();
 
   const onRemoveContact = () => {
@@ -22,7 +22,7 @@ export const ContactListItem = ({ name, number, id }) => {
 
   return (
     <ListItem key={id}>
-      {name}: {number}
+      {name}: {phone}
       <BtnDeleteItem onClick={() => onRemoveContact(id)}>Remove</BtnDeleteItem>
     </ListItem>
   );

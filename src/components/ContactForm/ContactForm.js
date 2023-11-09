@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { nanoid } from 'nanoid';
 
 import * as yup from 'yup';
 import { Formik, Form } from 'formik';
@@ -28,7 +27,7 @@ const Schema = yup.object().shape({
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
       'Enter valid symbols'
     ),
-  number: yup
+  phone: yup
     .string()
     .required('Required')
     .min(6, 'Number must be 6-13 characters long')
@@ -45,12 +44,12 @@ export const ContactForm = () => {
   return (
     <Formik
       initialValues={{
-        number: '',
+        phone: '',
         name: '',
       }}
       validationSchema={Schema}
       onSubmit={(values, actions) => {
-        const { name, number } = values;
+        const { name, phone } = values;
         if (
           contacts.some(
             contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -61,8 +60,7 @@ export const ContactForm = () => {
 
         const contact = {
           name,
-          number,
-          id: nanoid(),
+          phone,
         };
         dispatch(addContact(contact));
         Notify.success(`${name} has been successfully added to your contacts`);
@@ -77,8 +75,8 @@ export const ContactForm = () => {
         </Label>
         <Label>
           Number
-          <Input type="tel" name="number" placeholder="Enter number..." />
-          <ErrorMsg component="div" name="number" />
+          <Input type="tel" name="phone" placeholder="Enter number..." />
+          <ErrorMsg component="div" name="phone" />
         </Label>
         <BtnAddContact type="submit">Add contact</BtnAddContact>
       </Form>

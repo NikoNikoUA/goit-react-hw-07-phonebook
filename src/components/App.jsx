@@ -1,11 +1,17 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { GiRotaryPhone } from 'react-icons/gi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
-import { selectContacts } from '../../src/redux/selectors';
+import {
+  selectContacts,
+  selectError,
+  selectIsLoading,
+} from '../../src/redux/selectors';
+import { fetchContacts } from '../../src/redux/operations';
 
 import {
   Container,
@@ -27,6 +33,13 @@ Notify.init({
 
 export const App = () => {
   const contacts = useSelector(selectContacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -39,7 +52,8 @@ export const App = () => {
       <StatisticsContainer>
         <ContactsHeading>Contacts</ContactsHeading>
         <Filter />
-        {contacts.length ? (
+        {isLoading && !error && <b>Request in progress...</b>}
+        {contacts?.length ? (
           <ContactList />
         ) : (
           <NoContactsText>

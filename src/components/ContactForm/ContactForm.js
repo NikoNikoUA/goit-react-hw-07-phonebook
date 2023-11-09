@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { add } from '../../../src/redux/contactsSlice';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { nanoid } from 'nanoid';
 
@@ -7,7 +6,8 @@ import * as yup from 'yup';
 import { Formik, Form } from 'formik';
 import { Label } from './ContactForm.styled';
 import { Input, BtnAddContact, ErrorMsg } from './ContactForm.styled';
-import { getContacts } from '../../../src/redux/selectors';
+import { selectContacts } from '../../../src/redux/selectors';
+import { addContact } from '../../../src/redux/operations';
 
 Notify.init({
   borderRadius: '11px',
@@ -40,7 +40,7 @@ const Schema = yup.object().shape({
 });
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   return (
     <Formik
@@ -64,7 +64,7 @@ export const ContactForm = () => {
           number,
           id: nanoid(),
         };
-        dispatch(add(contact));
+        dispatch(addContact(contact));
         Notify.success(`${name} has been successfully added to your contacts`);
         actions.resetForm();
       }}

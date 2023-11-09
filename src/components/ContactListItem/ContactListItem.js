@@ -1,7 +1,7 @@
 import { BtnDeleteItem, ListItem } from './ContactListItem.styled';
 import { useDispatch } from 'react-redux';
-import { remove } from '../../../src/redux/contactsSlice';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { deleteContact } from '../../../src/redux/operations';
 
 Notify.init({
   borderRadius: '11px',
@@ -16,7 +16,7 @@ export const ContactListItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
   const onRemoveContact = () => {
-    dispatch(remove(id));
+    dispatch(deleteContact(id));
     Notify.success('The contact has been successfully removed');
   };
 

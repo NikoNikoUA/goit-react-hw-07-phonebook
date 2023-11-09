@@ -48,9 +48,9 @@ export const FormContainer = styled.div`
 export const StatisticsContainer = styled.div`
   position: absolute;
   background-color: ${props => props.theme.colors.backgroundColor};
-  top: 250px;
-  right: -50px;
-  min-width: 300px;
+  top: 265px;
+  right: -70px;
+  width: 350px;
   border-radius: 8px;
   box-shadow: 0px 0px 8px white;
   padding: 20px;
@@ -82,9 +82,3 @@ export const NoContactsText = styled.p`
   text-align: center;
   font-weight: bold;
 `;
-
-// export const Icon = styled.svg`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;

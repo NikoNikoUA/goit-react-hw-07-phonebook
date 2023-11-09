@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
-import { getContacts } from '../../src/redux/selectors';
+import { selectContacts } from '../../src/redux/selectors';
 
 import {
   Container,
@@ -26,7 +26,7 @@ Notify.init({
 });
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   return (
     <Container>

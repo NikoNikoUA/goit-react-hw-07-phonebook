@@ -18,7 +18,7 @@ export const ContactListItem = ({ name, phone, id }) => {
   const onRemoveContact = () => {
     dispatch(deleteContact(id))
       .unwrap()
-      .then(Notify.success('The contact has been successfully removed'))
+      .then(() => Notify.success('The contact has been successfully removed'))
       .catch(error => error.message);
   };
 

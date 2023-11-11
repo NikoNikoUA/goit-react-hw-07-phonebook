@@ -64,7 +64,7 @@ export const ContactForm = () => {
         };
         dispatch(addContact(contact))
           .unwrap()
-          .then(
+          .then(() =>
             Notify.success(
               `${name} has been successfully added to your contacts`
             )

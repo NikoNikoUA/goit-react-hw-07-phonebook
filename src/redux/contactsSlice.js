@@ -33,7 +33,6 @@ const contactsSlice = createSlice({
 
       .addCase(addContact.pending, handlePending)
       .addCase(addContact.fulfilled, (state, action) => {
-        console.log(action);
         state.isLoading = false;
         state.error = null;
         state.contacts = [...state.contacts, action.payload];

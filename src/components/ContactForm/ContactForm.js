@@ -62,8 +62,15 @@ export const ContactForm = () => {
           name,
           phone,
         };
-        dispatch(addContact(contact));
-        Notify.success(`${name} has been successfully added to your contacts`);
+        dispatch(addContact(contact))
+          .unwrap()
+          .then(
+            Notify.success(
+              `${name} has been successfully added to your contacts`
+            )
+          )
+          .catch(error => error.message);
+
         actions.resetForm();
       }}
     >
